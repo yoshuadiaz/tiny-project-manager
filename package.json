@@ -1,0 +1,33 @@
+{
+  "name": "project-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "standard:fix": "standard --fix",
+    "standard:validation": "standard",
+    "start:api": "nodemon api/index.js"
+  },
+  "keywords": [],
+  "author": "Yoshua Díaz <yoshua.sdiaz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "husky": "^4.2.3",
+    "nodemon": "^2.0.2",
+    "standard": "^14.3.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm standard:validation",
+      "pre-push": "npm standard:validation"
+    }
+  }
+}
