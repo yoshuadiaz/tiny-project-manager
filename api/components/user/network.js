@@ -3,6 +3,7 @@ const router = express.Router()
 
 const response = require('../../../network/response')
 const Controller = require('./index')
+
 router.get('/', list)
 router.post('/', register)
 

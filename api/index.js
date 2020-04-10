@@ -6,6 +6,7 @@ const config = require('../config')
 const rootComponent = require('./components/root/network')
 const userRoutes = require('./components/user/network')
 const authRoutes = require('./components/auth/network')
+const projectRoutes = require('./components/project/network')
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.use(bodyParser.json())
 
 app.use('/api/user', userRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/project', projectRoutes)
 
 app.use('/', rootComponent)
 

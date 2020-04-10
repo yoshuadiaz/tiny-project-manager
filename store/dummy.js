@@ -2,7 +2,8 @@ const { nanoid } = require('nanoid')
 
 const db = {
   user: [],
-  auth: []
+  auth: [],
+  project: []
 }
 
 async function list (table) {
@@ -33,14 +34,20 @@ async function insert (table, data) {
 
   return db[table].find(item => item.id === id)
 }
-async function update (table, data) {
+async function update (table, id, data) {
   if (!db[table]) {
     db[table] = []
   }
 
-  db[table].push(data)
+  const itemIndex = db[table].findIndex(item => item.id === id)
+
+  if (itemIndex >= 0) {
+    db[table][itemIndex] = { ...db[table][itemIndex], ...data }
+  }
+
   console.log(db)
-  return true
+
+  return db[table][itemIndex]
 }
 
 async function remove (table, id) {
