@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const auth = require('../../../auth/')
 
 const TABLE = 'auth'
 
@@ -19,7 +20,25 @@ module.exports = (
     return store.insert(TABLE, user)
   }
 
+  async function login (email, password) {
+    const user = await store.query(TABLE, { email })
+
+    if (!user.isBloqued) {
+      return bcrypt.compare(password, user.password)
+        .then(async isLogged => {
+          if (isLogged) {
+            return auth.sign({ ...user })
+          } else {
+            throw new Error('Invalid info')
+          }
+        })
+    }
+
+    throw new Error('invalid info')
+  }
+
   return {
-    insert
+    insert,
+    login
   }
 }
