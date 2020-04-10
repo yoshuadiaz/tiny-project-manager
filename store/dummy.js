@@ -3,7 +3,9 @@ const { nanoid } = require('nanoid')
 const db = {
   user: [],
   auth: [],
-  project: []
+  project: [],
+  client: [],
+  company: []
 }
 
 async function list (table) {
