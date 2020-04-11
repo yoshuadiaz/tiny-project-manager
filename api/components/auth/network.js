@@ -1,12 +1,16 @@
 const express = require('express')
 const response = require('../../../network/response')
 const Controller = require('./index')
+const passport = require('passport')
 const router = express.Router()
 
-router.post('/login', login)
+// Basic Strategy
+require('../../../auth/strategies/basic')
 
-function login (req, res) {
-  Controller.login(req.body.email, req.body.password)
+router.post('/login', passport.authenticate('basic', { session: false }), token)
+
+function token (req, res) {
+  Controller.token(req.user)
     .then(token => response.success(req, res, token, 200))
     .catch(() => response.error(req, res, 'Invalid information', 400))
 }

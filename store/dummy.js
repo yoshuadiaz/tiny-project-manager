@@ -22,7 +22,7 @@ async function get (table, id) {
     }
   })
 
-  return user
+  return { ...user }
 }
 async function insert (table, data) {
   if (!db[table]) {
@@ -37,7 +37,7 @@ async function insert (table, data) {
   console.log('/////////////////////////////////////////////')
   console.log('/////////////////////////////////////////////')
 
-  return db[table].find(item => item.id === id)
+  return { ...db[table].find(item => item.id === id) }
 }
 async function update (table, id, data) {
   if (!db[table]) {
@@ -56,7 +56,7 @@ async function update (table, id, data) {
   console.log('/////////////////////////////////////////////')
   console.log('/////////////////////////////////////////////')
 
-  return db[table][itemIndex]
+  return { ...db[table][itemIndex] }
 }
 
 async function remove (table, id) {
@@ -67,8 +67,7 @@ async function query (table, q) {
   const collection = await list(table)
   const keys = Object.keys(q)
   const key = keys[0]
-
-  return collection.find(item => item[key] === q[key]) || null
+  return { ...collection.find(item => item[key] === q[key]) }
 }
 
 module.exports = {

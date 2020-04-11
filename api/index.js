@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
+const passport = require('passport')
 
 const config = require('../config')
 const rootComponent = require('./components/root/network')
@@ -13,6 +14,7 @@ const companyRoutes = require('./components/company/network')
 const app = express()
 
 app.use(bodyParser.json())
+app.use(passport.initialize())
 
 app.use('/api/user', userRoutes)
 app.use('/api/auth', authRoutes)

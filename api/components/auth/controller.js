@@ -6,6 +6,10 @@ const TABLE = 'auth'
 module.exports = (
   store = require('../../../store/dummy')
 ) => {
+  async function get (email) {
+    return store.query(TABLE, { email })
+  }
+
   async function insert (data) {
     const user = {
       id: data.id,
@@ -21,25 +25,13 @@ module.exports = (
     return store.insert(TABLE, user)
   }
 
-  async function login (email, password) {
-    const user = await store.query(TABLE, { email })
-
-    if (!user.isBloqued) {
-      return bcrypt.compare(password, user.password)
-        .then(async isLogged => {
-          if (isLogged) {
-            return auth.sign({ ...user })
-          } else {
-            throw new Error('Invalid info')
-          }
-        })
-    }
-
-    throw new Error('invalid info')
+  async function token (user) {
+    return auth.sign({ ...user })
   }
 
   return {
     insert,
-    login
+    get,
+    token
   }
 }

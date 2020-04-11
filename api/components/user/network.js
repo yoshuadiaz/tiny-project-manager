@@ -1,10 +1,14 @@
 const express = require('express')
+const passport = require('passport')
 const router = express.Router()
 
 const response = require('../../../network/response')
 const Controller = require('./index')
 
-router.get('/', list)
+// JWT Strategy
+require('../../../auth/strategies/jwt')
+
+router.get('/', passport.authenticate('jwt', { session: false }), list)
 router.post('/', register)
 
 function list (req, res, next) {
