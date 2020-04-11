@@ -31,8 +31,11 @@ async function insert (table, data) {
   const id = data.id || nanoid()
 
   db[table].push({ ...data, id })
-
+  console.log('/////////////////////////////////////////////')
+  console.log('/////////////////////////////////////////////')
   console.log(db)
+  console.log('/////////////////////////////////////////////')
+  console.log('/////////////////////////////////////////////')
 
   return db[table].find(item => item.id === id)
 }
@@ -47,7 +50,11 @@ async function update (table, id, data) {
     db[table][itemIndex] = { ...db[table][itemIndex], ...data }
   }
 
+  console.log('/////////////////////////////////////////////')
+  console.log('/////////////////////////////////////////////')
   console.log(db)
+  console.log('/////////////////////////////////////////////')
+  console.log('/////////////////////////////////////////////')
 
   return db[table][itemIndex]
 }

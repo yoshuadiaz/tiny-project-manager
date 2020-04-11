@@ -14,7 +14,8 @@ module.exports = (
       isBloqued: false,
       isConfirmed: false,
       resetToken: null,
-      confirmationToken: null
+      confirmationToken: null,
+      company_id: data.company_id
     }
 
     return store.insert(TABLE, user)
