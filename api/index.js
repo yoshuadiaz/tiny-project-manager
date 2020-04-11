@@ -18,7 +18,6 @@ app.use('/api/user', userRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/project', projectRoutes)
 app.use('/api/client', clientRoutes)
-app.use('/api/company', clientRoutes)
 app.use('/api/company', companyRoutes)
 
 app.use('/', rootComponent)
