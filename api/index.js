@@ -16,11 +16,14 @@ const app = express()
 app.use(bodyParser.json())
 app.use(passport.initialize())
 
-app.use('/api/user', userRoutes)
+// JWT Strategy
+require('../auth/strategies/jwt')
+
+app.use('/api/user', passport.authenticate('jwt', { session: false }), userRoutes)
 app.use('/api/auth', authRoutes)
-app.use('/api/project', projectRoutes)
-app.use('/api/client', clientRoutes)
-app.use('/api/company', companyRoutes)
+app.use('/api/project', passport.authenticate('jwt', { session: false }), projectRoutes)
+app.use('/api/client', passport.authenticate('jwt', { session: false }), clientRoutes)
+app.use('/api/company', passport.authenticate('jwt', { session: false }), companyRoutes)
 
 app.use('/', rootComponent)
 
