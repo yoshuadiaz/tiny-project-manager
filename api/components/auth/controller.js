@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt')
 const auth = require('../../../auth/')
+const companyCtrl = require('../company')
+const userCtrl = require('../user')
 
 const TABLE = 'auth'
 
@@ -29,9 +31,25 @@ module.exports = (
     return auth.sign({ ...user })
   }
 
+  async function register (body) {
+    const companySaved = await companyCtrl.insert(body.company)
+    const user = {
+      first_name: body.user.first_name,
+      last_name: body.user.first_name,
+      email: body.user.email,
+      company_id: companySaved.id
+    }
+    const savedUser = await userCtrl.insert(user)
+
+    await insert({ ...savedUser, password: body.user.password })
+
+    return true
+  }
+
   return {
     insert,
     get,
-    token
+    token,
+    register
   }
 }

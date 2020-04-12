@@ -73,7 +73,8 @@ async function query (table, q) {
   const collection = await list(table)
   const keys = Object.keys(q)
   const key = keys[0]
-  return { ...collection.find(item => item[key] === q[key]) }
+  const results = collection.find(item => item[key] === q[key]) || null
+  return results ? { ...results } : null
 }
 
 module.exports = {

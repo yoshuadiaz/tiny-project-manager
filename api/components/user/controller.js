@@ -1,6 +1,3 @@
-const auth = require('../auth')
-const company = require('../company')
-
 const TABLE = 'user'
 
 module.exports = (
@@ -10,23 +7,13 @@ module.exports = (
     const users = await store.list(TABLE)
     return users
   }
-  async function register (body) {
-    const companySaved = await company.insert(body.company)
-    const user = {
-      first_name: body.user.first_name,
-      last_name: body.user.first_name,
-      email: body.user.email,
-      company_id: companySaved.id
-    }
-    const savedUser = await store.insert(TABLE, user)
 
-    await auth.insert({ ...savedUser, password: body.user.password })
-
-    return true
+  async function insert (company) {
+    return store.insert(TABLE, company)
   }
 
   return {
     list,
-    register
+    insert
   }
 }

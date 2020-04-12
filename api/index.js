@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const passport = require('passport')
+const cors = require('cors')
 
 const config = require('../config')
 const rootComponent = require('./components/root/network')
@@ -16,6 +17,7 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(passport.initialize())
+app.use(cors())
 
 // JWT Strategy
 require('../auth/strategies/jwt')
