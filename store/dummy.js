@@ -5,7 +5,13 @@ const db = {
   auth: [],
   project: [],
   client: [],
-  company: []
+  company: [],
+  contact: [],
+  role: [],
+  permission: [],
+  role_permission: [],
+  user_project: [],
+  contact_project: []
 }
 
 async function list (table) {
