@@ -12,7 +12,7 @@ router.post('/register', register)
 
 function token (req, res) {
   Controller.token(req.user)
-    .then(token => response.success(req, res, token, 200))
+    .then(token => response.success(req, res, { token, user: req.user }, 200))
     .catch(() => response.error(req, res, 'Invalid information', 400))
 }
 
