@@ -8,8 +8,8 @@ const TABLE = 'auth'
 module.exports = (
   store = require('../../../store/dummy')
 ) => {
-  async function get (email) {
-    return store.query(TABLE, { email })
+  async function get (q) {
+    return store.query(TABLE, q)
   }
 
   async function insert (data) {

@@ -7,7 +7,7 @@ const authService = require('../../api/components/auth')
 
 passport.use(new BasicStrategy(async (email, password, cb) => {
   try {
-    const user = await authService.get(email)
+    const user = await authService.get({ email })
     if (!user || user.isBloqued) {
       return cb(boom.unauthorized(), false)
     }
