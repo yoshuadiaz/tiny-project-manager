@@ -1,11 +1,12 @@
 const { nanoid } = require('nanoid')
 
 const db = {
+  company: [],
   user: [],
   auth: [],
-  project: [],
   client: [],
-  company: [],
+  status: [],
+  project: [],
   contact: [],
   role: [],
   permission: [],
@@ -73,8 +74,8 @@ async function query (table, q) {
   const collection = await list(table)
   const keys = Object.keys(q)
   const key = keys[0]
-  const results = collection.find(item => item[key] === q[key]) || null
-  return results ? { ...results } : null
+  const results = collection.filter(item => item[key] === q[key]) || null
+  return results && results.length > 0 ? [...results] : null
 }
 
 module.exports = {

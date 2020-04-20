@@ -19,10 +19,12 @@ passport.use(new BasicStrategy(async (email, password, cb) => {
     }
 
     delete user.password
-    delete user.isBloqued
-    delete user.isConfirmed
-    delete user.resetToken
-    delete user.confirmationToken
+    delete user.is_bloqued
+    delete user.is_confirmed
+    delete user.reset_token
+    delete user.confirmation_token
+    delete user.created_at
+    delete user.updated_at
 
     return cb(null, user)
   } catch (error) {
