@@ -1,5 +1,5 @@
 
-const { postgresql: { host, user, password, database, port } } = require('../config')
+const { knex: { host, user, password, database, port, client } } = require('../config')
 
 const dbConf = {
   host,
@@ -16,7 +16,7 @@ let connection
 async function handleConnection () {
   try {
     connection = knex({
-      client: 'pg',
+      client: client,
       connection: dbConf
     })
     console.log('DB Running')
