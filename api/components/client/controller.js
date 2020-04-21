@@ -13,8 +13,12 @@ module.exports = (
     return store.get(TABLE, id)
   }
 
-  async function insert (client) {
-    return store.insert(TABLE, client)
+  async function insert (client, user) {
+    return store.insert(TABLE, {
+      ...client,
+      company_id: user.company_id,
+      created_by: user.id
+    })
   }
 
   async function update (id, client) {

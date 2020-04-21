@@ -23,7 +23,7 @@ function get (req, res, next) {
 }
 
 function insert (req, res, next) {
-  Controller.insert(req.body)
+  Controller.insert(req.body, req.user)
     .then(project => response.success(req, res, project, 201))
     .catch(next)
 }

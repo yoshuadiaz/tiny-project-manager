@@ -44,12 +44,11 @@ async function insert (table, data) {
 
   return savedData[0]
 }
-async function update (table, data) {
-  const id = data.id
-  delete data.id
+async function update (table, id, data) {
+  const now = new Date()
   return connection(table)
     .where({ id })
-    .update(data)
+    .update({ ...data, updated_at: now.toISOString() })
 }
 async function query (table, query, join) {
   let dataFound

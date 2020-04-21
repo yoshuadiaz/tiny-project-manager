@@ -3,8 +3,8 @@ const TABLE = 'user'
 module.exports = (
   store = require('../../../store/dummy')
 ) => {
-  async function list () {
-    const users = await store.list(TABLE)
+  async function list (user) {
+    const users = await store.query(TABLE, { company_id: user.company_id })
     return users
   }
 

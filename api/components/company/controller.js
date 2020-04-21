@@ -7,6 +7,12 @@ module.exports = (
     return store.get(TABLE, id)
   }
 
+  async function list (user) {
+    return store.query(TABLE, {
+      company_id: user.company_id
+    })
+  }
+
   async function insert (company) {
     return store.insert(TABLE, company)
   }
@@ -17,6 +23,7 @@ module.exports = (
 
   return {
     get,
+    list,
     insert,
     update
   }

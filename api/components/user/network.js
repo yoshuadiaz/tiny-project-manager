@@ -10,7 +10,7 @@ require('../../../auth/strategies/jwt')
 router.get('/', list)
 
 function list (req, res, next) {
-  Controller.list()
+  Controller.list(req.user)
     .then(list => response.success(req, res, list, 200))
     .catch(next)
 }
