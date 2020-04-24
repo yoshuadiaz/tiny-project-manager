@@ -36,13 +36,18 @@ async function get (table, id) {
     .where({ id })
 }
 async function insert (table, data) {
-  const [id] = await connection(table)
-    .returning('id')
-    .insert(data)
+  try {
+    const [id] = await connection(table)
+      .returning('id')
+      .insert(data)
 
-  const savedData = await connection(table).where({ id })
+    const savedData = await connection(table).where({ id })
 
-  return savedData[0]
+    return savedData[0]
+  } catch (error) {
+    console.log(error)
+    throw new Error(error)
+  }
 }
 async function update (table, id, data) {
   const now = new Date()
