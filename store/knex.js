@@ -35,17 +35,19 @@ async function get (table, id) {
   return connection(table)
     .where({ id })
 }
-async function insert (table, data) {
+async function insert (table, data, t = null) {
   try {
-    const [id] = await connection(table)
-      .returning('id')
-      .insert(data)
+    const query = connection(table)
+    if (t) query.transacting(t)
+    const [id] = await query.insert(data, 'id')
 
-    const savedData = await connection(table).where({ id })
+    const savedData = connection(table)
+    if (t) savedData.transacting(t)
+    const [result] = await savedData.where({ id })
 
-    return savedData[0]
+    return result
   } catch (error) {
-    console.log(error)
+    t.rollback()
     throw new Error(error)
   }
 }
@@ -69,10 +71,16 @@ async function query (table, query, join) {
 
   return dataFound
 }
+
+async function transaction () {
+  return connection.transaction()
+}
+
 module.exports = {
   list,
   get,
   insert,
   update,
-  query
+  query,
+  transaction
 }

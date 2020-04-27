@@ -8,8 +8,8 @@ module.exports = (
     return users
   }
 
-  async function insert (company) {
-    return store.insert(TABLE, company)
+  async function insert (company, trx) {
+    return store.insert(TABLE, company, trx)
   }
 
   return {
