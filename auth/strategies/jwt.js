@@ -18,13 +18,11 @@ passport.use(
         return cb(boom.unauthorized(), false)
       }
 
-      delete user.password
-      delete user.isBloqued
-      delete user.isConfirmed
-      delete user.resetToken
-      delete user.confirmationToken
-
-      return cb(null, { ...user })
+      return cb(null, {
+        id: user.id,
+        email: user.id,
+        company_id: user.company_id
+      })
     } catch (error) {
       return cb(boom.unauthorized(), false)
     }

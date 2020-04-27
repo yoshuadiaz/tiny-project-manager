@@ -6,13 +6,23 @@ const router = express.Router()
 
 // Basic Strategy
 require('../../../auth/strategies/basic')
+require('../../../auth/strategies/cookie')
 
 router.post('/login', passport.authenticate('basic', { session: false }), token)
+router.post('/check', passport.authenticate('cookie', { session: false }), cookie)
 router.post('/register', register)
 
+function cookie (req, res) {
+  const token = req.cookies.token
+
+  response.success(req, res, { token, user: req.user }, 200)
+}
 function token (req, res) {
   Controller.token(req.user)
-    .then(token => response.success(req, res, { token, user: req.user }, 200))
+    .then(token => {
+      res.cookie('token', token)
+      response.success(req, res, { token, user: req.user }, 200)
+    })
     .catch(() => response.error(req, res, 'Invalid information', 400))
 }
 

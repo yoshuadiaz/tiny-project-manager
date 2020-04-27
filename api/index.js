@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 
 const config = require('../config')
 const rootComponent = require('./components/root/network')
@@ -17,8 +18,9 @@ const catalogRoutes = require('./components/catalog/network')
 const app = express()
 
 app.use(bodyParser.json())
+app.use(cookieParser())
 app.use(passport.initialize())
-app.use(cors())
+app.use(cors({ credentials: true, origin: 'http://localhost:8080' }))
 
 // JWT Strategy
 require('../auth/strategies/jwt')
