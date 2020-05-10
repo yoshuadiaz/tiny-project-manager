@@ -34,6 +34,7 @@ async function list (table) {
 async function get (table, id) {
   return connection(table)
     .where({ id })
+    .first()
 }
 async function insert (table, data, t = null) {
   try {

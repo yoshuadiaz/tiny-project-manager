@@ -42,7 +42,7 @@ module.exports = (
 
       const user = {
         first_name: body.user.first_name,
-        last_name: body.user.first_name,
+        last_name: body.user.last_name,
         email: body.user.email,
         company_id: companySaved.id,
         salary: body.user.salary,

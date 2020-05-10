@@ -8,12 +8,18 @@ module.exports = (
     return users
   }
 
+  async function me (userId) {
+    const user = await store.get(TABLE, userId)
+    return user
+  }
+
   async function insert (company, trx) {
     return store.insert(TABLE, company, trx)
   }
 
   return {
     list,
+    me,
     insert
   }
 }

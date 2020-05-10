@@ -8,6 +8,13 @@ const Controller = require('./index')
 require('../../../auth/strategies/jwt')
 
 router.get('/', list)
+router.get('/me', me)
+
+function me (req, res, next) {
+  Controller.me(req.user.id)
+    .then(me => response.success(req, res, me, 200))
+    .catch(next)
+}
 
 function list (req, res, next) {
   Controller.list(req.user)
