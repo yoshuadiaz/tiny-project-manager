@@ -20,7 +20,7 @@ function cookie (req, res) {
 function token (req, res) {
   Controller.token(req.user)
     .then(token => {
-      res.cookie('token', token)
+      res.cookie('token', token, { maxAge: 5400000, httpOnly: true })
       response.success(req, res, { token, user: req.user }, 200)
     })
     .catch(() => response.error(req, res, 'Invalid information', 400))

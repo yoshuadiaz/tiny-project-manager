@@ -8,7 +8,9 @@ async function sign (data) {
   delete data.isConfirmed
   delete data.resetToken
   delete data.confirmationToken
-  return jwt.sign(data, secret)
+  return jwt.sign(data, secret, {
+    expiresIn: '90m'
+  })
 }
 
 module.exports = {
