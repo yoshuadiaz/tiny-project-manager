@@ -8,7 +8,7 @@ router.put('/', update)
 
 function get (req, res, next) {
   Controller.get(req.user.company_id)
-    .then(list => response.success(req, res, list, 200))
+    .then(company => response.success(req, res, company, 200))
     .catch(next)
 }
 
