@@ -3,17 +3,20 @@ const TABLE = 'contact'
 module.exports = (
   store = require('../../../store/dummy')
 ) => {
-  async function list () {
-    const contacts = await store.list(TABLE)
+  async function list (clientId) {
+    const contacts = await store.query(TABLE, { client_id: clientId })
     return contacts
   }
 
-  async function get (id) {
-    return store.get(TABLE, id)
+  async function get (clientId, id) {
+    const result = await store.query(TABLE, { client_id: clientId, id })
+    return result[0]
   }
 
-  async function insert (contact) {
-    return store.insert(TABLE, contact)
+  async function insert (contact, user) {
+    return store.insert(TABLE, {
+      ...contact
+    })
   }
 
   async function update (id, contact) {

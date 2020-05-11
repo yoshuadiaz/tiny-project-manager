@@ -4,20 +4,20 @@ const router = express.Router()
 const response = require('../../../network/response')
 const Controller = require('./index')
 
-router.get('/', list)
-router.get('/:id', get)
+router.get('/:clientId', list)
+router.get('/:clientId/:id', get)
 router.post('/', insert)
 router.put('/:id', update)
 
 // ToDo Add list by client
 function list (req, res, next) {
-  Controller.list()
+  Controller.list(req.params.clientId)
     .then(list => response.success(req, res, list, 200))
     .catch(next)
 }
 
 function get (req, res, next) {
-  Controller.get(req.params.id)
+  Controller.get(req.params.clientId, req.params.id)
     .then(project => response.success(req, res, project, 200))
     .catch(next)
 }
