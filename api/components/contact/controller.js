@@ -4,7 +4,7 @@ module.exports = (
   store = require('../../../store/dummy')
 ) => {
   async function list (clientId) {
-    const contacts = await store.query(TABLE, { client_id: clientId }, '')
+    const contacts = await store.query(TABLE, { client_id: clientId })
     return contacts
   }
 

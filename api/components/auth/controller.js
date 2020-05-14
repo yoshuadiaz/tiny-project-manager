@@ -47,6 +47,7 @@ module.exports = (
         company_id: companySaved.id,
         salary: body.user.salary,
         currency: body.user.currency,
+        occupation: body.user.occupation,
         work_type_id: body.user.work_type_id
       }
 
@@ -60,6 +61,7 @@ module.exports = (
       delete user.status_id
       delete user.salary
       delete user.currency
+      delete user.occupation
       delete user.work_type_id
 
       await insert({ ...user, id: savedUser.id, password: body.user.password }, trx)

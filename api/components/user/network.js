@@ -4,9 +4,6 @@ const router = express.Router()
 const response = require('../../../network/response')
 const Controller = require('./index')
 
-// JWT Strategy
-require('../../../auth/strategies/jwt')
-
 router.get('/', list)
 router.get('/me', me)
 

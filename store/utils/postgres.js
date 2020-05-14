@@ -49,6 +49,7 @@ CREATE TABLE "user" (
   last_name VARCHAR(150) NOT NULL,
   email VARCHAR(150) UNIQUE NOT NULL,
   company_id uuid NOT NULL,
+  occupation VARCHAR(150) NOT NULL,
   salary FLOAT,
   currency VARCHAR(4),
   status_id uuid,

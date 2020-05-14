@@ -48,7 +48,7 @@ async function insert (table, data, t = null) {
 
     return result
   } catch (error) {
-    t.rollback()
+    if (t) t.rollback()
     throw new Error(error)
   }
 }
