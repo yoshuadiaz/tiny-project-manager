@@ -1,3 +1,4 @@
+const Boom = require('@hapi/boom')
 const TABLE = 'user'
 
 module.exports = (
@@ -13,13 +14,23 @@ module.exports = (
     return user
   }
 
-  async function insert (company, trx) {
-    return store.insert(TABLE, company, trx)
+  async function insert (user, trx) {
+    return store.insert(TABLE, user, trx)
+  }
+
+  async function update (authenticatedUser, id, data) {
+    const user = await store.get(TABLE, id)
+    delete data.email
+    delete data.password
+    delete data.company_id
+    if (authenticatedUser.company_id === user.company_id) return store.update(TABLE, id, data)
+    throw new Error(Boom.unauthorized())
   }
 
   return {
     list,
     me,
-    insert
+    insert,
+    update
   }
 }
