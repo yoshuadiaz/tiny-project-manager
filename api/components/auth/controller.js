@@ -48,7 +48,7 @@ module.exports = (
         salary: body.user.salary,
         currency: body.user.currency,
         occupation: body.user.occupation,
-        work_type_id: body.user.work_type_id
+        work_type_id: 'cbeb8fb9-bf3f-42ed-8be1-88793e084cc9'
       }
 
       const savedUser = await userCtrl.insert({
