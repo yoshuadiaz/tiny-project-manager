@@ -74,10 +74,49 @@ module.exports = (
     }
   }
 
+  async function addUser (userLogged, body) {
+    const trx = await store.transaction()
+
+    try {
+      const user = {
+        first_name: body.first_name,
+        last_name: body.last_name,
+        email: body.email,
+        company_id: userLogged.company_id,
+        salary: body.salary,
+        currency: body.currency,
+        occupation: body.occupation,
+        work_type_id: body.work_type_id
+      }
+
+      const savedUser = await userCtrl.insert({
+        ...user,
+        status_id: '27ed4728-936e-43c2-a850-c6034ab5d1d2'
+      }, trx)
+
+      delete user.first_name
+      delete user.last_name
+      delete user.status_id
+      delete user.salary
+      delete user.currency
+      delete user.occupation
+      delete user.work_type_id
+
+      await insert({ ...user, id: savedUser.id, password: body.password }, trx)
+      await trx.commit()
+      return true
+    } catch (error) {
+      await trx.rollback()
+      console.error('ERROR: ', error)
+      throw new Error(boom.badData())
+    }
+  }
+
   return {
     insert,
     get,
     token,
-    register
+    register,
+    addUser
   }
 }
