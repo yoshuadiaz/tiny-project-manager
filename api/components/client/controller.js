@@ -4,8 +4,8 @@ module.exports = (
   store = require('../../../store/dummy')
 ) => {
   // ToDo List by Company
-  async function list () {
-    const clients = await store.list(TABLE)
+  async function list (userAuthenticated) {
+    const clients = await store.query(TABLE, { company_id: userAuthenticated.company_id })
     return clients
   }
 
