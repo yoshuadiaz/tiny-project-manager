@@ -8,13 +8,13 @@ router.get('/gender', gender)
 
 router.get(
   '/project_status',
-  passport.authenticate('jwt', { session: false }),
+  passport.authenticate(['cookie', 'jwt'], { session: false }),
   projectStatus
 )
 
 router.get(
   '/user_status',
-  passport.authenticate('jwt', { session: false }),
+  passport.authenticate(['cookie', 'jwt'], { session: false }),
   userStatus
 )
 
