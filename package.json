@@ -12,22 +12,36 @@
   "author": "Yoshua Díaz <yoshua.sdiaz@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@hapi/boom": "^9.1.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.0",
+    "passport": "^0.4.1",
+    "passport-cookie": "^1.0.6",
+    "passport-http": "^0.3.0",
+    "passport-jwt": "^4.0.0",
+    "pg": "^8.0.3"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "husky": "^4.2.3",
+    "eslint-config-standard": "^14.1.1",
+    "husky": "^4.2.5",
+    "nanoid": "^3.0.2",
     "nodemon": "^2.0.2",
     "standard": "^14.3.3"
   },
+  "engines": {
+    "node": "^12.16.2"
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "npm standard:validation",
-      "pre-push": "npm standard:validation"
+      "pre-commit": "npm run standard:validation",
+      "pre-push": "npm run standard:validation"
     }
   }
 }
